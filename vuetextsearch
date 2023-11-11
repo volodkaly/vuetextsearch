@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Filter Example</title>
+  <!-- Include Vue 3 library -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  
+</head>
+<body>
+
+<div id="app">
+  Your text:
+    <input v-model="message">
+    <br>
+    <br>
+    Search:
+    <input v-model="query">
+
+  
+  <p v-if="queryStart === -1"><span style="font-weight: bold; color: red">not found</span> <br><br>{{message}}</p>
+  
+  <pre v-else>
+  <br>
+  <br>
+  {{ message.slice(0, queryStart) }}<mark>{{message.slice(queryStart, queryStart + query.length)}}</mark>{{message.slice(queryStart + query.length) }}
+  <br>
+  <br>
+</pre>
+
+</div>
+
+<script>
+
+    const {createApp,ref} = Vue;
+  // Vue 3 instance
+  createApp({
+    data() {
+      return {
+        message: 'Type some text here',
+        query: 'Search in the text'
+      };
+    },
+    computed: {
+      queryStart() {
+        return this.message.search(this.query);
+      }
+    }
+
+  }).mount('#app');
+
+  
+</script>
+
+</body>
+</html>
+
+
